@@ -5,6 +5,15 @@
   background-color: #529f46; /* Thay đổi thành màu nền mong muốn */
 }
 
+@keyframes blink {
+  0%, 100% {
+    opacity: 1; /* Tại các thời điểm bắt đầu và kết thúc của animation, đặt opactity về 100% */
+  }
+  50% {
+    opacity: 0; /* Tại điểm giữa khoảng thời gian, làm mờ nhẹ nhàng đến opacity 0% */
+  }
+}
+
 .text-box {
   background-color: #529f46;
   color: #f6f6f6;
@@ -12,23 +21,10 @@
   border-radius: 5px;
   text-align: center;
   font-family: Arial, sans-serif;
-  font-weight: bold; /* độ đậm */
-  animation: blink 1s infinite; /* hiệu ứng nhấp nháy */
+  font-weight: bold;
+  animation: blink 1.5s infinite; /* Áp dụng animation nhẹ nhàng hơn với thời gian lặp lại là 1.5s */
   font-size: 35px;
 }
-
-@keyframes blink {
-  0% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.5;
-  }
-  100% {
-    opacity: 1.5;
-  }
-}
-
 #background {
   width: 100%;
   height: 100%;
