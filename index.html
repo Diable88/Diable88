@@ -234,30 +234,6 @@
 
         ctx.drawImage(backgroundImage, 0, 0); // Vẽ ảnh nền lên canvas
         
-        $(document).ready(function () {
-      $('#confirmMessage').on('click', function () {
-        // Lấy thông điệp từ textarea
-        const message = $('#messageInput').val();
-        if (!message) {
-          alert('Vui lòng nhập thông điệp!');
-          return;
-        }
         
-        // Tạo canvas và vẽ ảnh nền lên đó
-        const canvas = document.createElement('canvas');
-        const ctx = canvas.getContext('2d');
-        canvas.width = backgroundImage.naturalWidth;
-        canvas.height = backgroundImage.naturalHeight;
-        
-        ctx.drawImage(backgroundImage, 0, 0);
-        ctx.fillStyle = 'black'; // Đặt màu chữ
-        ctx.font = '30px Arial'; // Đặt font và kích cỡ chữ
-        ctx.fillText(message, 50, canvas.height - 50); // Vẽ thông điệp lên ảnh
-        
-        // Cập nhật hình nền trong thẻ img
-        backgroundImage.src = canvas.toDataURL('image/png');
-      });
-    });
-  </script>
 </body>
 </html>
