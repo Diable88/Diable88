@@ -53,8 +53,14 @@
             <img id="cropper-image" class="h-100 w-100" style="max-width: 100%;" src="" alt="Ảnh cần crop">
           </div>
         </div>
-        <div class="message-input-section mt-4 container">
-    
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tắt</button>
+          <button type="button" class="btn btn-primary" id="cropModalSubmitButton">Xác nhận</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script>
     function dataURLtoBlob(dataURL)
@@ -70,13 +76,6 @@
 
       return new Blob([ab], { type: 'image/png' }); // Đặt kiểu MIME tương ứng với loại ảnh bạn đang sử dụng
     }
-    <div class="message-input-section">
-    <div class="mb-3">
-      <label for="messageInput" class="form-label">NHẬP THÔNG ĐIỆP</label>
-      <textarea class="form-control" id="messageInput" rows="3"></textarea>
-    </div>
-    <button id="confirmMessage" class="btn btn-primary">XÁC NHẬN</button>
-  </div>
   </script>
   <script>
     const API_NAME = "12345";
@@ -219,16 +218,7 @@
         uploadButton.text('UPLOAD');
       }
     }
-    $(document).ready(function () {
-      $('#confirmMessage').on('click', function () {
-        const message = $('#messageInput').val();
-        const canvas = document.createElement('canvas');
-        const ctx = canvas.getContext('2d');
-        canvas.width = backgroundImage.naturalWidth;
-        canvas.height = backgroundImage.naturalHeight;
-
-        ctx.drawImage(backgroundImage, 0, 0); // Vẽ ảnh nền lên canvas
-        
-        
+  </script>
 </body>
+
 </html>
