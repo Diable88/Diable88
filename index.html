@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 
@@ -35,21 +36,7 @@
           <button class="upload-submit">UPLOAD</button>
           <div id="noImageChosen" class="text-danger d-none">Chưa chọn ảnh</div>
         </div>
-<!-- Phần nhập thông điệp hiển thị cùng với chọn ảnh -->
-  <div class="upload-and-message-section">
-    <div class="mb-3">
-      <label for="messageInput" class="form-label">NHẬP THÔNG ĐIỆP</label>
-      <textarea class="form-control" id="messageInput" rows="3"></textarea>
-    </div>
-    <div id="result-section" class="result-section">
-    <img id="final-image" src="" alt="Ảnh sau khi ghép" style="max-width:100%;display:none;">
-  </div>
-    <input type="file" id="imageUpload" hidden>
-    <label for="imageUpload" class="upload-button btn btn-info">CHỌN ẢNH</label>
 
-    <button class="upload-submit btn btn-primary">UPLOAD</button>
-    <div id="noImageChosen" class="text-danger d-none">Chưa chọn ảnh và nhập thông điệp</div>
-  </div>
       </div>
     </div>
   </div>
@@ -231,33 +218,8 @@
         uploadButton.prop('disabled', false);
         uploadButton.text('UPLOAD');
       }
-       // Bổ sung thêm script để xử lý việc hiển thị khung nhập và nút xác nhận sau khi tác vụ upload kết thúc
-    function showInputSection() {
-      $('.message-input-section').fadeIn(); // Sử dụng fadeIn để hiện khung nhập một cách nhẹ nhàng
-    }// Script để xử lý khi người dùng nhấn nút 'Xác Nhận'
-    $(document).ready(function () {
-      $('#confirmMessage').on('click', function () {
-        const message = $('#messageInput').val();
-        if (!message) {
-          alert('Vui lòng nhập thông điệp!');
-          return;
-        }
-        
-        // Tạo canvas và vẽ ảnh nền sau đó ghép thông điệp vào phía bên trái của ảnh
-        const canvas = document.createElement('canvas');
-        const ctx = canvas.getContext('2d');
-        canvas.width = backgroundImage.naturalWidth;
-        canvas.height = backgroundImage.naturalHeight;
-        ctx.drawImage(backgroundImage, 0, 0);
-        ctx.fillStyle = 'white'; // Đặt màu chữ
-        ctx.font = '30px Arial'; // Đặt font và kích cỡ chữ
-        ctx.textAlign = 'left';  // Căn lề trái
-        ctx.fillText(message, 10, canvas.height / 2); // Vẽ thông điệp vào vị trí mong muốn
-
-        // Cập nhật hình ảnh nền với thông điệp mới
-        backgroundImage.src = canvas.toDataURL('image/png');
-      });
-    });
+    }
   </script>
 </body>
+
 </html>
