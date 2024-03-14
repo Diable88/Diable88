@@ -238,40 +238,52 @@
         uploadButton.text('UPLOAD');
       }
     }
-    // Function này được gọi khi ghép ảnh và lấy được URL kết quả
+    // Function gọi sau khi ảnh đã ghép xong và có URL
 function imageMergeComplete(imageResultUrl) {
-  // Gán URL của ảnh kết quả vào image object, sau đó vẽ lên canvas
+  // Hiển thị ô nhập liệu và nút xác nhận
+  document.getElementById('userMessage').style.display = 'block';
+  document.getElementById('addMessageButton').style.display = 'block';
+
+  // Gán URL của ảnh kết quả vào image object
   var img = document.getElementById('processedImage');
   img.onload = function() {
     var canvas = document.getElementById('resultCanvas');
     var ctx = canvas.getContext('2d');
-    // Đảm bảo canvas được xóa trước khi vẽ
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    // Vẽ ảnh lên canvas
     ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
   }
   img.src = imageResultUrl;
 }
 
+// Function để thêm văn bản vào ảnh và hiển thị ảnh kết quả
 function drawText() {
   var canvas = document.getElementById('resultCanvas');
   var ctx = canvas.getContext('2d');
-  var img = document.getElementById('processedImage');
-  var text = document.getElementById('userMessage').value;
+  var text = document.getElementById('userMessage').value; // Lấy văn bản từ ô input
 
-  // Vẽ lại ảnh để chắc chắn văn bản được thêm lên ảnh hiện tại
+  // Vẽ lại ảnh để đảm bảo văn bản đè lên ảnh hiện tại
   ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-  
-  // Thêm thông điệp trên ảnh kết quả hiện tại trong canvas
+
+  // Thêm văn bản vào ảnh
   ctx.font = '20px Arial';
   ctx.fillStyle = 'black';
   ctx.textAlign = 'center';
-  ctx.fillText(text, canvas.width / 2, canvas.height / 2);  // Tùy chỉnh vị trí
+  ctx.fillText(text, canvas.width / 2, 30); // Điều chỉnh vị trí text trên ảnh nếu cần
+
+  // Lấy dataURL từ canvas và thay thế cho ảnh ban đầu trên trang chủ
+  var dataURL = canvas.toDataURL();
+  document.getElementById('background').src = dataURL; // Thay thế ảnh ban đầu trên trang chủ
 }
 
-// Sử dụng URL ảnh kết quả ví dụ sau khi ghép ảnh thành công
-var urlImgResult = 'đường-dẫn-tới-ảnh-kết-quả.jpg';
+// Gán event cho nút Xác nhận
+document.getElementById('addMessageButton').addEventListener('click', drawText);
+
+// URL giả định của ảnh sau khi đã xử lý xong
+var urlImgResult = 'path-to-processed-image.jpg';
 imageMergeComplete(urlImgResult);
-  </script>
-</body>
+
+// Giấu nút và ô nhập sau khi xử lý
+document.getElementById('userMessage').style.display = 'none';
+document.getElementById('addMessageButton').style.display = 'none';
 
 </html>
