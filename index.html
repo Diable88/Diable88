@@ -155,26 +155,7 @@
         isImageChosen.removeClass('d-none');
         return;
       }
-      Get the user-entered message and set up text styling
-      const userMessage = document.getElementById('userMessage').value.toUpperCase();
-      const processedImageHeight = 1024;
-      const textX = 20; // Horizontal position on the left
-      const textY = canvas.height / 2; // Centered vertically
-      
-      const ctx = canvas.getContext('2d');
-      ctx.drawImage(backgroundImage, 0, 0);
-
-      if (userMessage) {
-        // Add text to canvas
-        ctx.font = "700 50px Roboto"; // Font weight 700, size 50px
-        ctx.fillStyle = "white";
-        ctx.textAlign = "left";
-        ctx.fillText(userMessage, textX, textY);
-      }
-
-      if (processedImage) {
-        ctx.drawImage(processedImage, processedImageX, processedImageY, processedImageWidth, processedImageHeight);
-      }
+     
       console.log(croppedDataURL);
 
       var byteString = atob(croppedDataURL.split(',')[1]);
