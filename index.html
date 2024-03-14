@@ -66,6 +66,17 @@
           <button type="button" class="btn btn-primary" id="cropModalSubmitButton">Xác nhận</button>
         </div>
       </div>
+      <!-- Phần hiển thị ảnh kết quả và vùng nhập liệu -->
+      <div id="imageResultSection">
+        <!-- Canvas để vẽ ảnh và thông điệp lên đó -->
+        <canvas id="resultCanvas" width="800" height="600"></canvas>
+        <!-- Vùng nhập liệu cho thông điệp của người dùng -->
+        <input type="text" id="userMessage" placeholder="*Viết thông điệp của bạn" class="form-control me-2">
+        <!-- Nút để thêm thông điệp lên ảnh -->
+        <button id="addMessageButton" onclick="drawText()">Thêm thông điệp</button>
+      </div>
+      <!-- Giả định ảnh kết quả có id là processedImage -->
+      <img id="processedImage" src="#" style="display: none;" alt="Ảnh kết quả" />
     </div>
   </div>
 
@@ -227,6 +238,39 @@
         uploadButton.text('UPLOAD');
       }
     }
+    // Function này được gọi khi ghép ảnh và lấy được URL kết quả
+function imageMergeComplete(imageResultUrl) {
+  // Gán URL của ảnh kết quả vào image object, sau đó vẽ lên canvas
+  var img = document.getElementById('processedImage');
+  img.onload = function() {
+    var canvas = document.getElementById('resultCanvas');
+    var ctx = canvas.getContext('2d');
+    // Đảm bảo canvas được xóa trước khi vẽ
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+  }
+  img.src = imageResultUrl;
+}
+
+function drawText() {
+  var canvas = document.getElementById('resultCanvas');
+  var ctx = canvas.getContext('2d');
+  var img = document.getElementById('processedImage');
+  var text = document.getElementById('userMessage').value;
+
+  // Vẽ lại ảnh để chắc chắn văn bản được thêm lên ảnh hiện tại
+  ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+  
+  // Thêm thông điệp trên ảnh kết quả hiện tại trong canvas
+  ctx.font = '20px Arial';
+  ctx.fillStyle = 'black';
+  ctx.textAlign = 'center';
+  ctx.fillText(text, canvas.width / 2, canvas.height / 2);  // Tùy chỉnh vị trí
+}
+
+// Sử dụng URL ảnh kết quả ví dụ sau khi ghép ảnh thành công
+var urlImgResult = 'đường-dẫn-tới-ảnh-kết-quả.jpg';
+imageMergeComplete(urlImgResult);
   </script>
 </body>
 
