@@ -15,6 +15,8 @@
     crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css" />
+  <!-- Add Google Fonts for Roboto -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -36,9 +38,12 @@
           <button class="upload-submit">UPLOAD</button>
           <div id="noImageChosen" class="text-danger d-none">Chưa chọn ảnh</div>
         </div>
+         <div class="upload-buttons d-flex align-items-center">
 
       </div>
     </div>
+  </div>
+  <input type="text" id="userMessage" placeholder="NHẬP THÔNG ĐIỆP CỦA BẠN" class="form-control me-2" style="max-width: 300px;">
   </div>
 
   <!-- Crop ảnh -->
@@ -149,6 +154,26 @@
         uploadButton.text('UPLOAD');
         isImageChosen.removeClass('d-none');
         return;
+      }
+      Get the user-entered message and set up text styling
+      const userMessage = document.getElementById('userMessage').value.toUpperCase();
+      const processedImageHeight = 1024;
+      const textX = 20; // Horizontal position on the left
+      const textY = canvas.height / 2; // Centered vertically
+      
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(backgroundImage, 0, 0);
+
+      if (userMessage) {
+        // Add text to canvas
+        ctx.font = "700 50px Roboto"; // Font weight 700, size 50px
+        ctx.fillStyle = "white";
+        ctx.textAlign = "left";
+        ctx.fillText(userMessage, textX, textY);
+      }
+
+      if (processedImage) {
+        ctx.drawImage(processedImage, processedImageX, processedImageY, processedImageWidth, processedImageHeight);
       }
       console.log(croppedDataURL);
 
