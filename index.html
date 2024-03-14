@@ -53,14 +53,13 @@
             <img id="cropper-image" class="h-100 w-100" style="max-width: 100%;" src="" alt="Ảnh cần crop">
           </div>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tắt</button>
-          <button type="button" class="btn btn-primary" id="cropModalSubmitButton">Xác nhận</button>
-        </div>
-      </div>
+        <div class="message-input-section mt-4 container">
+    <div class="mb-3">
+      <label for="messageInput" class="form-label">NHẬP THÔNG ĐIỆP</label>
+      <textarea class="form-control" id="messageInput" rows="3"></textarea>
     </div>
+    <button id="confirmMessage" class="btn btn-primary">XÁC NHẬN</button>
   </div>
-
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script>
     function dataURLtoBlob(dataURL)
@@ -235,14 +234,30 @@
 
         ctx.drawImage(backgroundImage, 0, 0); // Vẽ ảnh nền lên canvas
         
-        // Cài đặt style văn bản
-        ctx.fillStyle = 'white'; // Màu chữ
-        ctx.font = '30px Arial'; // Cỡ chữ và font
-        ctx.fillText(message, 20, canvas.height - 40); // Vẽ thông điệp
-        backgroundImage.src = canvas.toDataURL('image/jpeg'); // Cập nhật ảnh nền với thông điệp mới
+        $(document).ready(function () {
+      $('#confirmMessage').on('click', function () {
+        // Lấy thông điệp từ textarea
+        const message = $('#messageInput').val();
+        if (!message) {
+          alert('Vui lòng nhập thông điệp!');
+          return;
+        }
+        
+        // Tạo canvas và vẽ ảnh nền lên đó
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = backgroundImage.naturalWidth;
+        canvas.height = backgroundImage.naturalHeight;
+        
+        ctx.drawImage(backgroundImage, 0, 0);
+        ctx.fillStyle = 'black'; // Đặt màu chữ
+        ctx.font = '30px Arial'; // Đặt font và kích cỡ chữ
+        ctx.fillText(message, 50, canvas.height - 50); // Vẽ thông điệp lên ảnh
+        
+        // Cập nhật hình nền trong thẻ img
+        backgroundImage.src = canvas.toDataURL('image/png');
       });
     });
   </script>
 </body>
-
 </html>
