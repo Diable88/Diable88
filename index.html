@@ -1,7 +1,4 @@
-
-<!DOCTYPE html>
 <html>
-
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8">
   <title>Trang chủ</title>
@@ -15,8 +12,6 @@
     crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css" />
-  <!-- Add Google Fonts for Roboto -->
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -38,14 +33,9 @@
           <button class="upload-submit">UPLOAD</button>
           <div id="noImageChosen" class="text-danger d-none">Chưa chọn ảnh</div>
         </div>
-         <div class="upload-buttons d-flex align-items-center">
 
       </div>
     </div>
-  </div>
-  <div class="d-flex justify-content-center align-items-center" style="height: 100vh; /* Chiều cao bằng với viewport để căn giữa theo chiều dọc */">
-  <input type="text" id="userMessage" placeholder="*Viết thông điệp của bạn" class="form-control me-2" style="max-width: 300px; margin-top: -50px;">
-  </div>
   </div>
 
   <!-- Crop ảnh -->
@@ -66,17 +56,6 @@
           <button type="button" class="btn btn-primary" id="cropModalSubmitButton">Xác nhận</button>
         </div>
       </div>
-      <!-- Phần hiển thị ảnh kết quả và vùng nhập liệu -->
-      <div id="imageResultSection">
-        <!-- Canvas để vẽ ảnh và thông điệp lên đó -->
-        <canvas id="resultCanvas" width="800" height="600"></canvas>
-        <!-- Vùng nhập liệu cho thông điệp của người dùng -->
-        <input type="text" id="userMessage" placeholder="*Viết thông điệp của bạn" class="form-control me-2">
-        <!-- Nút để thêm thông điệp lên ảnh -->
-        <button id="addMessageButton" onclick="drawText()">Thêm thông điệp</button>
-      </div>
-      <!-- Giả định ảnh kết quả có id là processedImage -->
-      <img id="processedImage" src="#" style="display: none;" alt="Ảnh kết quả" />
     </div>
   </div>
 
@@ -97,8 +76,8 @@
     }
   </script>
   <script>
-    const API_NAME = "12345";
-    const API_KEY = "w99E996F6Df1Dx3Tb9brixzx";
+    const API_NAME = "23456";
+    const API_KEY = "x7vWBK76hkL28kZCbeq1JWCr";
     let croppedDataURL = "";
 
     const fileInput = $('#imageUpload')[0];
@@ -168,7 +147,6 @@
         isImageChosen.removeClass('d-none');
         return;
       }
-     
       console.log(croppedDataURL);
 
       var byteString = atob(croppedDataURL.split(',')[1]);
@@ -238,52 +216,7 @@
         uploadButton.text('UPLOAD');
       }
     }
-    // Function gọi sau khi ảnh đã ghép xong và có URL
-function imageMergeComplete(imageResultUrl) {
-  // Hiển thị ô nhập liệu và nút xác nhận
-  document.getElementById('userMessage').style.display = 'block';
-  document.getElementById('addMessageButton').style.display = 'block';
-
-  // Gán URL của ảnh kết quả vào image object
-  var img = document.getElementById('processedImage');
-  img.onload = function() {
-    var canvas = document.getElementById('resultCanvas');
-    var ctx = canvas.getContext('2d');
-    // Vẽ ảnh lên canvas
-    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-  }
-  img.src = imageResultUrl;
-}
-
-// Function để thêm văn bản vào ảnh và hiển thị ảnh kết quả
-function drawText() {
-  var canvas = document.getElementById('resultCanvas');
-  var ctx = canvas.getContext('2d');
-  var text = document.getElementById('userMessage').value; // Lấy văn bản từ ô input
-
-  // Vẽ lại ảnh để đảm bảo văn bản đè lên ảnh hiện tại
-  ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-
-  // Thêm văn bản vào ảnh
-  ctx.font = '20px Arial';
-  ctx.fillStyle = 'black';
-  ctx.textAlign = 'center';
-  ctx.fillText(text, canvas.width / 2, 30); // Điều chỉnh vị trí text trên ảnh nếu cần
-
-  // Lấy dataURL từ canvas và thay thế cho ảnh ban đầu trên trang chủ
-  var dataURL = canvas.toDataURL();
-  document.getElementById('background').src = dataURL; // Thay thế ảnh ban đầu trên trang chủ
-}
-
-// Gán event cho nút Xác nhận
-document.getElementById('addMessageButton').addEventListener('click', drawText);
-
-// URL giả định của ảnh sau khi đã xử lý xong
-var urlImgResult = 'path-to-processed-image.jpg';
-imageMergeComplete(urlImgResult);
-
-// Giấu nút và ô nhập sau khi xử lý
-document.getElementById('userMessage').style.display = 'none';
-document.getElementById('addMessageButton').style.display = 'none';
+  </script>
+</body>
 
 </html>
