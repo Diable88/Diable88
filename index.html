@@ -97,8 +97,32 @@
     }
   </script>
   <script>
-    const API_NAME = "23456";
-    const API_KEY = "x7vWBK76hkL28kZCbeq1JWCr";
+    const YOUR_API_KEY = 'your-actual-api-key-goes-here'; // Thay bằng cụm API Key thực tế của bạn
+
+// Giả sử photo là đối tượng File hoặc Blob chứa hình ảnh muốn xóa nền
+const form = new FormData();
+form.append('image_file', photo);
+
+fetch('https://clipdrop-api.co/remove-background/v1', {
+  method: 'POST',
+  headers: {
+    'x-api-key': YOUR_API_KEY,
+  },
+  body: form,
+})
+.then(response => response.arrayBuffer())
+.then(buffer => {
+  // Ở đây buffer là biểu diễn nhị phân của hình ảnh trả về
+  // Bạn có thể chuyển đổi buffer thành một đối tượng Blob và hiển thị hình ảnh trên trang web của bạn
+  const imageBlob = new Blob([buffer], { type: 'image/png' });
+  const imageURL = URL.createObjectURL(imageBlob);
+
+  // Cập nhật src của phần tử img hoặc ngữ cảnh canvas ở đây
+  document.getElementById('your-image-element-id').src = imageURL;
+})
+.catch(error => {
+  console.error('There was an error with the ClipDrop API:', error);
+});
     let croppedDataURL = "";
 
     const fileInput = $('#imageUpload')[0];
