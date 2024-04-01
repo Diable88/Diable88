@@ -186,7 +186,7 @@
           var processedImageWidth = 768;
           var processedImageHeight = 1024;
           var processedImageX = 1000;
-          var processedImageY = 20;
+          var processedImageY = 5;
 
           const canvas = document.createElement('canvas');
           canvas.width = backgroundImage.naturalWidth;
@@ -217,19 +217,6 @@
       }
     }
   </script>
-    <script>
-    // Hàm để hiển thị nút mới
-    function showNewButton() {
-        document.getElementById("addText").hidden = false; // Loại bỏ thuộc tính hidden để hiển thị nút
-    }
-
-    // Gắn hàm showNewButton với sự kiện nhấn nút upload
-    document.getElementById("imageUpload").addEventListener("change", function() {
-        if (this.files && this.files.length > 0) {
-            showNewButton(); // Hiển thị nút mới nếu có file được chọn
-        }
-    });
-</script>
 </body>
 
 </html>
