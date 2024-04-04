@@ -112,7 +112,7 @@ body {
   padding: 5px 5px;
   background-color: #00537e;
   color: white;
-  border: none;
+  border: 2px solid white; /* Thêm dòng này để tạo viền trắng */
   border-radius: 8px;
   cursor: pointer;
   margin-right: 10px;
