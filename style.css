@@ -110,8 +110,8 @@ body {
 #changeBackground {
   display: inline-block;
   padding: 5px 5px;
-  background-color: #00577e;
-  color: #d1cc29;
+  background-color: #f5f9fb;
+  color: #00537e;
   border: 8px;
   border-radius: 8px;
   cursor: pointer;
